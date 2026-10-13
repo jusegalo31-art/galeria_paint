@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El laboratorio de Paint: pequeños artistas digitales</title>
+  <meta name="description" content="Plataforma educativa para aprender a utilizar las herramientas de Microsoft Paint mediante retos creativos y un museo de arte digital para cuarto de primaria." />
+  
+  <!-- Tipografía amigable y moderna -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. PANTALLA DE BIENVENIDA
+       ========================================================================= -->
+  <div id="screen-welcome" class="app-screen welcome-container">
+    <div class="welcome-card">
+      <div class="welcome-decorative-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 1.02 3.5 1.02 2.22 0 4-1.77 4-4a2.99 2.99 0 0 0-2.5-2.06Z"/></svg>
+        <span>Laboratorio Creativo • 4.º Primaria</span>
+      </div>
+
+      <h1 class="welcome-title">El laboratorio de Paint</h1>
+      <h2 class="welcome-subtitle">Pequeños artistas digitales</h2>
+
+      <!-- Ilustración central de niños en el computador creando arte -->
+      <div class="welcome-illustration-box">
+        <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="wel-mon" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0284c7"/><stop offset="100%" stop-color="#0369a1"/></linearGradient>
+            <linearGradient id="wel-desk" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#d97706"/></linearGradient>
+          </defs>
+          <!-- Mesa -->
+          <rect x="20" y="150" width="280" height="12" rx="4" fill="url(#wel-desk)"/>
+          <!-- Monitor -->
+          <rect x="70" y="30" width="180" height="110" rx="8" fill="#1e293b"/>
+          <rect x="80" y="40" width="160" height="90" rx="4" fill="#ffffff"/>
+          <!-- Pantalla con Paint simulado -->
+          <rect x="80" y="40" width="160" height="16" fill="#0284c7"/>
+          <circle cx="90" cy="48" r="3" fill="#f87171"/>
+          <circle cx="98" cy="48" r="3" fill="#facc15"/>
+          <circle cx="106" cy="48" r="3" fill="#4ade80"/>
+          <!-- Dibujo adentro -->
+          <circle cx="120" cy="80" r="14" fill="#fbbf24"/>
+          <polygon points="180,65 155,95 205,95" fill="#ec4899"/>
+          <rect x="165" y="95" width="30" height="25" fill="#38bdf8"/>
+          <!-- Base monitor -->
+          <rect x="150" y="140" width="20" height="12" fill="#64748b"/>
+          <rect x="135" y="150" width="50" height="5" rx="2" fill="#475569"/>
+          <!-- Paleta de colores al lado -->
+          <ellipse cx="45" cy="145" rx="18" ry="12" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <circle cx="38" cy="142" r="3" fill="#ef4444"/>
+          <circle cx="48" cy="140" r="3" fill="#3b82f6"/>
+          <circle cx="46" cy="148" r="3" fill="#10b981"/>
+          <!-- Pincel -->
+          <line x1="265" y1="130" x2="285" y2="155" stroke="#92400e" stroke-width="4" stroke-linecap="round"/>
+          <path d="M285,155 L292,160" stroke="#f43f5e" stroke-width="5" stroke-linecap="round"/>
+          <!-- Estrellas flotantes de creatividad -->
+          <polygon points="50,40 53,48 61,48 55,53 57,61 50,56 43,61 45,53 39,48 47,48" fill="#facc15"/>
+          <polygon points="275,50 277,56 283,56 278,60 280,66 275,62 270,66 272,60 267,56 273,56" fill="#38bdf8"/>
+        </svg>
+      </div>
+
+      <p class="welcome-text-lead">
+        Explora las herramientas de Paint, completa los 4 retos y crea tu propio <strong>museo de arte digital</strong> con todas tus obras maestras.
+      </p>
+
+      <!-- Explicación de Paint y PNG -->
+      <div class="paint-notice-box">
+        <div class="paint-notice-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m19 11-8-8-8.6 8.6a2 2 0 0 0 0 2.8l5.2 5.2c.8.8 2 .8 2.8 0L19 11Z"/></svg>
+        </div>
+        <div class="paint-notice-content">
+          <h4>¿Qué necesitas para esta aventura?</h4>
+          <p>
+            Abrirás <strong>Microsoft Paint</strong> en tu computador para hacer cada dibujo. Cuando termines, guárdalo como <strong>imagen PNG</strong> y súbelo a su reto correspondiente.
+          </p>
+        </div>
+      </div>
+
+      <div class="welcome-actions">
+        <button id="btn-start-adventure" class="btn btn-primary btn-xl btn-pulse">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <span>¡Comenzar aventura!</span>
+        </button>
+
+        <div class="welcome-secondary-actions">
+          <button id="btn-resume-welcome" class="btn btn-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.45-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.55 6a2 2 0 0 1-1.94 1.5H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H18a2 2 0 0 1 2 2v2"/></svg>
+            <span>Continuar un proyecto guardado</span>
+          </button>
+          <button id="btn-tutorial-welcome" class="btn btn-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span>Tutorial: Cómo guardar en PNG</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. PANEL PRINCIPAL DE RETOS («¡Manos a la obra!»)
+       ========================================================================= -->
+  <div id="screen-dashboard" class="app-screen hidden">
+    <!-- Barra superior fija -->
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="brand-wrapper">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 1.02 3.5 1.02 2.22 0 4-1.77 4-4a2.99 2.99 0 0 0-2.5-2.06Z"/></svg>
+          </div>
+          <div class="brand-titles">
+            <h1>El laboratorio de Paint</h1>
+            <span class="brand-tagline">Pequeños artistas digitales</span>
+          </div>
+        </div>
+
+        <div class="header-user-profile">
+          <span class="student-greeting-text" id="dashboard-greeting">¡Hola, Artista!</span>
+          <button id="btn-edit-student-name" class="btn-icon-mini" title="Cambiar mi nombre">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </button>
+        </div>
+
+        <div class="header-quick-actions">
+          <button id="btn-tutorial-header" class="btn btn-secondary btn-sm" title="Ver pasos para guardar en Paint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span>Tutorial Paint</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Héroe de Progreso -->
+    <section class="progress-hero-section">
+      <div class="progress-hero-container">
+        <div class="progress-info-row">
+          <div class="progress-left-block">
+            <div class="progress-badge-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="progress-text-col">
+              <h2>Mi Progreso de Artista</h2>
+              <p id="progress-count-text">0 de 4 retos completados</p>
+            </div>
+          </div>
+          <div class="progress-percentage-badge" id="progress-percentage-badge">0%</div>
+        </div>
+
+        <!-- Barra visual de avance -->
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="progress-bar-fill"></div>
+        </div>
+
+        <!-- Botones de gestión del proyecto y museo -->
+        <div class="progress-actions-row">
+          <div class="project-management-group">
+            <button id="btn-save-progress" class="btn btn-secondary" title="Descargar archivo de proyecto para continuar en otro computador">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              <span>Guardar mi progreso (.laboratoriopaint)</span>
+            </button>
+            <button id="btn-load-progress" class="btn btn-secondary" title="Abrir un archivo descargado anteriormente">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.45-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.55 6a2 2 0 0 1-1.94 1.5H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H18a2 2 0 0 1 2 2v2"/></svg>
+              <span>Continuar un proyecto guardado</span>
+            </button>
+          </div>
+
+          <div class="museum-trigger-group">
+            <button id="btn-view-museum" class="btn btn-locked" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22h20"/><path d="M4 18v-7"/><path d="M9 18v-7"/><path d="M15 18v-7"/><path d="M20 18v-7"/><path d="M12 2 2 8h20L12 2z"/><path d="M2 18h20"/></svg>
+              <span>Ver mi museo</span>
+            </button>
+            <span class="museum-status-indicator" id="museum-lock-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Faltan 4 para abrir</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Banner destacado cuando todos los retos están completos -->
+        <div id="all-complete-banner" class="all-complete-banner hidden">
+          <div class="banner-content">
+            <div class="banner-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="banner-text">
+              <h3>¡Felicitaciones, artista! Has completado todos los desafíos.</h3>
+              <p>Tu museo digital está listo para abrir sus puertas y exhibir tus 4 obras de arte.</p>
+            </div>
+          </div>
+          <button class="btn btn-download-museum" onclick="app.showScreen('museum')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22h20"/><path d="M4 18v-7"/><path d="M9 18v-7"/><path d="M15 18v-7"/><path d="M20 18v-7"/><path d="M12 2 2 8h20L12 2z"/></svg>
+            <span>¡Entrar al Museo!</span>
+          </button>
+        </div>
+
+        <!-- Nota pedagógica sobre el guardado local -->
+        <div class="local-safety-notice">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span><strong>Recuerda:</strong> Tu progreso se conserva temporalmente en este navegador. Para no perder tus dibujos al apagar el equipo o cambiar de computador, presiona <strong>«Guardar mi progreso»</strong> y descarga tu archivo de proyecto.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contenido de Retos -->
+    <main class="dashboard-main-content">
+      <div class="section-headline">
+        <h2>¡Manos a la obra!</h2>
+        <p>
+          Completa los desafíos utilizando Microsoft Paint. Cuando termines un dibujo, guárdalo como PNG y súbelo al reto correspondiente.
+        </p>
+      </div>
+
+      <!-- Cuadrícula de tarjetas de los 4 retos -->
+      <div class="challenges-grid" id="challenges-grid">
+        <!-- Renderizado dinámico desde app.js -->
+      </div>
+    </main>
+  </div>
+
+  <!-- =========================================================================
+       3. PANTALLA DEL MUSEO DIGITAL
+       ========================================================================= -->
+  <div id="screen-museum" class="app-screen hidden">
+    <div id="museum-content" class="museum-screen-wrapper">
+      <!-- Renderizado dinámico desde museum.js -->
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       4. MODAL: ¿CÓMO TE LLAMAS, ARTISTA?
+       ========================================================================= -->
+  <div id="name-modal" class="modal-overlay hidden">
+    <div class="modal-card name-form-card">
+      <div class="modal-body-scrollable">
+        <div class="name-prompt-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3 style="font-size: 1.6rem; font-weight: 900; color: #0f172a;">¿Cómo te llamas, artista?</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Escribe tu nombre y apellido para personalizar tu laboratorio y colocar tu firma en el gran museo final.
+        </p>
+
+        <div class="name-form-input-box">
+          <label for="input-student-name" class="name-form-label">Tu nombre y apellido:</label>
+          <input
+            type="text"
+            id="input-student-name"
+            class="text-input-styled"
+            placeholder="Ejemplo: Sofía Martínez"
+            maxlength="60"
+            autocomplete="name"
+          />
+          <p class="name-privacy-guarantee">
+            🔒 Solo se guardará en este computador para firmar tu museo. No pedimos correos ni datos personales.
+          </p>
+        </div>
+
+        <button id="btn-save-name" class="btn btn-primary btn-lg btn-block">
+          <span>Entrar al laboratorio</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       5. MODAL INDIVIDUAL DEL RETO (DETALLE Y CARGA)
+       ========================================================================= -->
+  <div id="challenge-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <header class="modal-header">
+        <div class="modal-header-text">
+          <h3 id="modal-challenge-title">Reto 1</h3>
+          <span class="modal-category-badge" id="modal-challenge-category">Categoría</span>
+        </div>
+        <button class="btn-close-modal" onclick="app.closeModal('challenge-modal')" title="Cerrar ventana">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </header>
+
+      <div class="modal-body-scrollable">
+        <!-- Objetivo Pedagógico -->
+        <div class="challenge-detail-box">
+          <h4 class="detail-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            <span>Objetivo de aprendizaje</span>
+          </h4>
+          <p class="detail-text" id="modal-challenge-goal"></p>
+        </div>
+
+        <!-- Instrucciones paso a paso -->
+        <div class="challenge-detail-box">
+          <h4 class="detail-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            <span>Instrucciones para el estudiante</span>
+          </h4>
+          <p class="detail-text" id="modal-challenge-instructions"></p>
+        </div>
+
+        <!-- Herramientas de Paint a practicar -->
+        <div>
+          <h4 class="detail-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 1.02 3.5 1.02 2.22 0 4-1.77 4-4a2.99 2.99 0 0 0-2.5-2.06Z"/></svg>
+            <span>Herramientas de Paint a practicar</span>
+          </h4>
+          <div class="tools-modal-grid" id="modal-challenge-tools"></div>
+        </div>
+
+        <!-- Guía de inspiración y consejos -->
+        <div class="challenge-detail-box" style="background: #f0fdf4; border-color: #bbf7d0;">
+          <h4 class="detail-section-title" style="color: #166534;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>Idea de referencia y consejos creativos</span>
+          </h4>
+          <p class="detail-text" id="modal-challenge-ref" style="margin-bottom: 8px; font-weight: 600; color: #14532d;"></p>
+          <ul class="tips-list" id="modal-challenge-tips"></ul>
+        </div>
+
+        <!-- Botón de acceso directo al tutorial -->
+        <div style="display: flex; justify-content: flex-end;">
+          <button class="btn btn-secondary btn-sm" onclick="app.openTutorialModal()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span>¿Cómo exporto mi dibujo a PNG en Paint?</span>
+          </button>
+        </div>
+
+        <!-- ZONA DE CARGA DE DIBUJO -->
+        <div>
+          <h4 class="detail-section-title" style="margin-bottom: 12px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span>Sube tu dibujo desde tu computador</span>
+          </h4>
+
+          <!-- DropZone para cuando no hay imagen seleccionada -->
+          <div id="challenge-dropzone" class="upload-zone-wrapper" onclick="document.getElementById('challenge-file-input').click()">
+            <div class="upload-icon-circle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <p class="upload-prompt-text">Arrastra y suelta tu archivo PNG aquí</p>
+            <p class="upload-sub-text">o haz clic para buscarlo en tu computador</p>
+            <span class="upload-format-tag">Formato PNG recomendado • Máx. 15 MB</span>
+          </div>
+
+          <!-- Vista previa para cuando ya hay imagen seleccionada -->
+          <div id="upload-preview-container" class="preview-card hidden">
+            <div class="preview-media-box">
+              <img id="upload-preview-img" src="" alt="Vista previa del dibujo de Paint" />
+            </div>
+            <div class="preview-meta-row">
+              <span class="preview-filename" id="upload-filename">dibujo.png</span>
+              <span class="preview-status-badge">✓ Archivo listo</span>
+            </div>
+            <div class="preview-controls-row">
+              <button id="btn-replace-preview-img" class="btn btn-secondary btn-sm">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                <span>Reemplazar por otra versión</span>
+              </button>
+              <button id="btn-remove-preview-img" class="btn btn-danger-outline btn-sm">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                <span>Eliminar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pedagogical-evidence-note">
+          <strong>Aviso docente:</strong> La imagen que subas quedará como evidencia visual en tu museo final para que tu profesor pueda revisar tu creatividad y uso de las herramientas.
+        </div>
+      </div>
+
+      <footer class="modal-footer">
+        <button class="btn btn-secondary" onclick="app.closeModal('challenge-modal')">
+          <span>Volver a mis retos</span>
+        </button>
+        <button id="btn-confirm-challenge" class="btn btn-disabled" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Confirmar y completar reto</span>
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       6. MODAL: TUTORIAL «CÓMO EXPORTAR DESDE PAINT A PNG»
+       ========================================================================= -->
+  <div id="tutorial-modal" class="modal-overlay hidden">
+    <div class="modal-card tutorial-modal-card">
+      <header class="modal-header">
+        <div class="modal-header-text">
+          <h3>Tutorial: Cómo exportar desde Paint a PNG</h3>
+          <span class="modal-category-badge" style="background: #ecfdf5; color: #047857;">Guía visual paso a paso</span>
+        </div>
+        <button class="btn-close-modal" onclick="app.closeModal('tutorial-modal')" title="Cerrar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </header>
+
+      <div class="modal-body-scrollable">
+        <p style="font-size: 0.95rem; color: var(--text-muted);">
+          Sigue estos 7 sencillos pasos en tu computador para guardar tus creaciones con la mayor calidad antes de subirlas al laboratorio:
+        </p>
+
+        <div class="tutorial-steps-grid" id="tutorial-steps-container">
+          <!-- Renderizado dinámico desde app.js -->
+        </div>
+
+        <div class="paint-notice-box" style="margin: 10px 0 0 0;">
+          <div class="paint-notice-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <div class="paint-notice-content">
+            <h4>¿Tienes Windows 10 o Windows 11?</h4>
+            <p>
+              En Windows 10, haz clic en el menú azul «Archivo». En Windows 11, haz clic en el botón con icono de engranaje o menú de tres puntos y elige «Guardar como» → «Imagen PNG». ¡Ambas versiones funcionan de maravilla!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <footer class="modal-footer">
+        <button class="btn btn-primary" onclick="app.closeModal('tutorial-modal')">
+          <span>¡Entendido, volver a crear!</span>
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       7. MODAL DE CELEBRACIÓN (TODOS LOS RETOS COMPLETOS)
+       ========================================================================= -->
+  <div id="celebration-modal" class="modal-overlay hidden">
+    <div class="modal-card celebration-card">
+      <div class="celebration-trophy-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H8c-.55 0-1 .45-1 1v1h10v-1c0-.55-.45-1-1-1h-1c-.55 0-1-.45-1-1v-2.34"/><path d="M18 4H6v6c0 3.31 2.69 6 6 6s6-2.69 6-6V4Z"/></svg>
+      </div>
+      <h2>¡Felicitaciones, gran artista!</h2>
+      <p>
+        Has superado los 4 desafíos de Microsoft Paint. Tu dedicación, paciencia y creatividad han dado fruto. ¡Tu museo de arte digital ha abierto sus puertas!
+      </p>
+      <button class="btn btn-download-museum btn-lg btn-block" onclick="app.closeModal('celebration-modal'); app.showScreen('museum');">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22h20"/><path d="M4 18v-7"/><path d="M9 18v-7"/><path d="M15 18v-7"/><path d="M20 18v-7"/><path d="M12 2 2 8h20L12 2z"/></svg>
+        <span>¡Inaugurar y visitar mi Museo!</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       8. INPUTS OCULTOS, CONTROLES FLOTANTES Y TOASTS
+       ========================================================================= -->
+  <!-- Input oculto para subir imagen al reto -->
+  <input type="file" id="challenge-file-input" accept="image/png,image/jpeg,image/jpg,image/webp" class="sr-only" />
+
+  <!-- Input oculto para restaurar archivo de proyecto (.laboratoriopaint) -->
+  <input type="file" id="input-project-file" accept=".laboratoriopaint,.zip" class="sr-only" />
+
+  <!-- Botón flotante para activar/silenciar sonidos -->
+  <button id="btn-sound-toggle" class="sound-toggle-btn" title="Silenciar o activar sonidos">
+    <!-- SVG asignado dinámicamente -->
+  </button>
+
+  <!-- Contenedor flotante de notificaciones Toast -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Overlay de generación de PNG en proceso -->
+  <div id="export-loading-overlay" class="loading-overlay hidden">
+    <div class="loading-spinner"></div>
+    <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 6px;">Componiendo tu museo digital...</h3>
+    <p style="color: #cbd5e1; font-size: 0.95rem;">Enmarcando tus 4 obras en alta resolución.</p>
+  </div>
+
+  <!-- =========================================================================
+       9. SCRIPTS LOCALES (SIN DEPENDENCIAS EXTERNAS DE INTERNET)
+       ========================================================================= -->
+  <script src="js/vendor/jszip.min.js"></script>
+  <script src="js/vendor/confetti.browser.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/challenges.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/uploads.js"></script>
+  <script src="js/project.js"></script>
+  <script src="js/museum.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

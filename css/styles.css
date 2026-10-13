@@ -1,0 +1,1873 @@
+/* ==========================================================================
+   El laboratorio de Paint: pequeños artistas digitales
+   Diseño UX/UI infantil moderno, accesible y alegre para 4to de primaria
+   ========================================================================== */
+
+/* ---------- VARIABLES Y TOKENS DE DISEÑO ---------- */
+:root {
+  /* Paleta cromática principal */
+  --color-primary: #0284c7;
+  --color-primary-hover: #0369a1;
+  --color-primary-light: #e0f2fe;
+  
+  --color-accent-amber: #f59e0b;
+  --color-accent-emerald: #10b981;
+  --color-accent-rose: #f43f5e;
+  --color-accent-purple: #8b5cf6;
+  --color-accent-teal: #14b8a6;
+
+  /* Fondos y superficies */
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-subtle: #f1f5f9;
+  --bg-overlay: rgba(15, 23, 42, 0.65);
+
+  /* Textos y contrastes */
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-light: #94a3b8;
+  --text-white: #ffffff;
+
+  /* Bordes y sombras */
+  --border-light: #e2e8f0;
+  --border-accent: #cbd5e1;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.09);
+  --shadow-hover: 0 16px 36px rgba(2, 132, 199, 0.16);
+
+  /* Tipografía */
+  --font-family: 'Outfit', 'Nunito', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* ---------- RESET Y CONFIGURACIÓN BÁSICA ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(#e2e8f0 1.2px, transparent 1.2px),
+    radial-gradient(#f1f5f9 1.2px, var(--bg-main) 1.2px);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+}
+
+img, svg {
+  max-width: 100%;
+  display: block;
+}
+
+button, input {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* ---------- CLASES UTILITARIAS ---------- */
+.hidden {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* ---------- BOTONES PRINCIPALES ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  user-select: none;
+}
+
+.btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: var(--text-white);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(2, 132, 199, 0.38);
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: var(--text-main);
+  border: 2px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: var(--color-primary-light);
+  transform: translateY(-2px);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: var(--text-white);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-success:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(16, 185, 129, 0.4);
+}
+
+.btn-download-museum {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.35);
+}
+
+.btn-download-museum:hover {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 24px rgba(245, 158, 11, 0.45);
+}
+
+.btn-lg {
+  padding: 16px 32px;
+  font-size: 1.15rem;
+  border-radius: var(--radius-lg);
+}
+
+.btn-xl {
+  padding: 18px 40px;
+  font-size: 1.25rem;
+  border-radius: var(--radius-xl);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-sm {
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  border-radius: var(--radius-sm);
+}
+
+.btn-danger-outline {
+  background: transparent;
+  border: 1.5px solid #fca5a5;
+  color: #dc2626;
+}
+
+.btn-danger-outline:hover {
+  background: #fef2f2;
+}
+
+.btn:disabled, .btn-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn-pulse {
+  animation: pulse-attention 2s infinite;
+}
+
+@keyframes pulse-attention {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+/* Botón flotante de audio */
+.sound-toggle-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99;
+  background: #ffffff;
+  border: 2px solid var(--border-light);
+  border-radius: 50px;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sound-toggle-btn:hover {
+  background: #f8fafc;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.sound-toggle-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ==========================================================================
+   1. PANTALLA DE BIENVENIDA
+   ========================================================================== */
+.welcome-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.welcome-card {
+  background: var(--bg-card);
+  max-width: 900px;
+  width: 100%;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  border: 2px solid #e2e8f0;
+  padding: 50px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-decorative-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.welcome-decorative-badge svg {
+  width: 20px;
+  height: 20px;
+  color: #0284c7;
+}
+
+.welcome-title {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1.15;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.welcome-subtitle {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #0284c7;
+  margin-bottom: 28px;
+}
+
+/* Ilustración central en bienvenida */
+.welcome-illustration-box {
+  max-width: 380px;
+  margin: 0 auto 30px auto;
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  background: linear-gradient(180deg, #f0fdf4 0%, #e0f2fe 100%);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.welcome-text-lead {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  max-width: 680px;
+  margin: 0 auto 28px auto;
+}
+
+/* Caja informativa sobre Paint */
+.paint-notice-box {
+  background: #f8fafc;
+  border-left: 5px solid #0284c7;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 18px 24px;
+  max-width: 700px;
+  margin: 0 auto 34px auto;
+  text-align: left;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.paint-notice-icon {
+  background: #e0f2fe;
+  color: #0284c7;
+  padding: 10px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.paint-notice-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.paint-notice-content h4 {
+  font-size: 1.05rem;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.paint-notice-content p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.welcome-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.welcome-secondary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* ==========================================================================
+   2. ENCABEZADO Y DASHBOARD PRINCIPAL
+   ========================================================================== */
+.app-header {
+  background: #ffffff;
+  border-bottom: 2px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+  color: #ffffff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);
+}
+
+.brand-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.brand-titles h1 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.brand-titles .brand-tagline {
+  font-size: 0.85rem;
+  color: #0284c7;
+  font-weight: 600;
+}
+
+.header-user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8fafc;
+  padding: 8px 16px;
+  border-radius: 50px;
+  border: 1.5px solid var(--border-light);
+}
+
+.student-greeting-text {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.student-highlight {
+  color: #0284c7;
+  font-weight: 800;
+}
+
+.btn-icon-mini {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #64748b;
+  display: flex;
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.btn-icon-mini:hover {
+  color: #0284c7;
+  background: #e0f2fe;
+}
+
+.btn-icon-mini svg {
+  width: 16px;
+  height: 16px;
+}
+
+.header-quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Banner de progreso global */
+.progress-hero-section {
+  background: #ffffff;
+  border-bottom: 2px solid var(--border-light);
+  padding: 24px;
+}
+
+.progress-hero-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.progress-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.progress-left-block {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.progress-badge-icon {
+  width: 48px;
+  height: 48px;
+  background: #fef3c7;
+  color: #d97706;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-badge-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.progress-text-col h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.progress-text-col p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.progress-percentage-badge {
+  background: #e0f2fe;
+  color: #0284c7;
+  font-size: 1.25rem;
+  font-weight: 900;
+  padding: 6px 16px;
+  border-radius: 50px;
+  border: 2px solid #bae6fd;
+}
+
+/* Barra de progreso visual */
+.progress-bar-track {
+  width: 100%;
+  height: 16px;
+  background: #f1f5f9;
+  border-radius: 50px;
+  overflow: hidden;
+  position: relative;
+  border: 1.5px solid var(--border-light);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #38bdf8 0%, #0284c7 60%, #10b981 100%);
+  border-radius: 50px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+/* Barra de botones de acción del progreso */
+.progress-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-top: 6px;
+}
+
+.project-management-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.museum-trigger-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.museum-status-indicator {
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #64748b;
+}
+
+.museum-status-indicator svg {
+  width: 16px;
+  height: 16px;
+}
+
+.btn-locked {
+  background: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+  border: 2px solid #cbd5e1;
+}
+
+.btn-unlocked {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4);
+}
+
+/* Banner de felicitación por completar los 10 */
+.all-complete-banner {
+  background: linear-gradient(135deg, #ecfdf5 0%, #dcfce7 100%);
+  border: 2px solid #34d399;
+  border-radius: var(--radius-md);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+  animation: pop-in 0.4s ease;
+}
+
+.banner-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.banner-icon {
+  background: #10b981;
+  color: #ffffff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.banner-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.banner-text h3 {
+  font-size: 1.15rem;
+  color: #065f46;
+  font-weight: 800;
+}
+
+.banner-text p {
+  font-size: 0.95rem;
+  color: #047857;
+}
+
+/* Aviso de seguridad local */
+.local-safety-notice {
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+  border-left: 4px solid #f59e0b;
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: #92400e;
+}
+
+.local-safety-notice svg {
+  width: 18px;
+  height: 18px;
+  color: #d97706;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   3. SECCIÓN DE RETOS («¡Manos a la obra!»)
+   ========================================================================== */
+.dashboard-main-content {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 36px 24px 60px 24px;
+}
+
+.section-headline {
+  margin-bottom: 28px;
+}
+
+.section-headline h2 {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.section-headline p {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 750px;
+}
+
+/* Cuadrícula de tarjetas de retos */
+.challenges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.challenge-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.challenge-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  border-color: #93c5fd;
+}
+
+.challenge-card.is-completed {
+  border-color: #86efac;
+}
+
+.card-header {
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-light);
+  background: #fafafa;
+}
+
+.card-number-badge {
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #0284c7;
+  background: #e0f2fe;
+  padding: 4px 12px;
+  border-radius: 50px;
+}
+
+.card-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 50px;
+}
+
+.card-status-pill svg {
+  width: 14px;
+  height: 14px;
+}
+
+.status-pending {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.status-done {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+/* Zona de vista previa en tarjeta */
+.card-preview-zone {
+  height: 170px;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-light);
+  position: relative;
+}
+
+.card-illustration-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.card-art-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.card-thumbnail-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0f172a;
+}
+
+.card-thumbnail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.25s ease;
+}
+
+.card-preview-zone:hover .card-thumbnail-img {
+  transform: scale(1.04);
+}
+
+.thumbnail-overlay-zoom {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(15, 23, 42, 0.75);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  backdrop-filter: blur(4px);
+}
+
+.thumbnail-overlay-zoom svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Cuerpo de tarjeta */
+.card-body {
+  padding: 18px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.card-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-tools-list {
+  margin-top: auto;
+}
+
+.tools-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.tool-tags-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tool-tag {
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tool-tag svg {
+  width: 12px;
+  height: 12px;
+  color: #0284c7;
+}
+
+.card-footer {
+  padding: 14px 18px;
+  border-top: 1px solid var(--border-light);
+  background: #ffffff;
+}
+
+/* ==========================================================================
+   4. MODALES (VENTANAS DE DIÁLOGO FLOTANTES)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  backdrop-filter: blur(6px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-card {
+  background: var(--bg-card);
+  width: 100%;
+  max-width: 720px;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  border: 2px solid var(--border-light);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-header {
+  padding: 20px 28px;
+  background: #ffffff;
+  border-bottom: 1.5px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.modal-header-text h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.modal-category-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #0284c7;
+  background: #e0f2fe;
+  padding: 2px 10px;
+  border-radius: 50px;
+  margin-top: 4px;
+}
+
+.btn-close-modal {
+  background: #f1f5f9;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #64748b;
+  transition: all 0.2s;
+}
+
+.btn-close-modal:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.btn-close-modal svg {
+  width: 18px;
+  height: 18px;
+}
+
+.modal-body-scrollable {
+  padding: 24px 28px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.modal-footer {
+  padding: 16px 28px;
+  background: #f8fafc;
+  border-top: 1.5px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Bloques dentro del modal del reto */
+.challenge-detail-box {
+  background: #f8fafc;
+  border-radius: var(--radius-md);
+  padding: 18px;
+  border: 1px solid var(--border-light);
+}
+
+.detail-section-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0284c7;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-section-title svg {
+  width: 18px;
+  height: 18px;
+}
+
+.detail-text {
+  font-size: 0.95rem;
+  color: #334155;
+  line-height: 1.5;
+}
+
+/* Píldoras de herramientas en modal */
+.tools-modal-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.tool-modal-pill {
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #1e293b;
+}
+
+.tool-modal-pill .tool-icon svg {
+  width: 16px;
+  height: 16px;
+  color: #0284c7;
+}
+
+/* Lista de consejos */
+.tips-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.tips-list li {
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.tip-bullet {
+  color: #f59e0b;
+  font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   5. ZONA DE CARGA DE ARCHIVO (DROPZONE & PREVIEW)
+   ========================================================================== */
+.upload-zone-wrapper {
+  background: #ffffff;
+  border: 2px dashed #94a3b8;
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
+  text-align: center;
+  transition: all 0.22s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.upload-zone-wrapper:hover, .upload-zone-wrapper.drag-active {
+  border-color: #0284c7;
+  background: #f0f9ff;
+  transform: scale(1.01);
+}
+
+.upload-icon-circle {
+  width: 64px;
+  height: 64px;
+  background: #e0f2fe;
+  color: #0284c7;
+  border-radius: 50%;
+  margin: 0 auto 14px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-icon-circle svg {
+  width: 32px;
+  height: 32px;
+}
+
+.upload-prompt-text {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.upload-sub-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.upload-format-tag {
+  display: inline-block;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 50px;
+}
+
+/* Vista previa de imagen subida */
+.preview-card {
+  background: #ffffff;
+  border: 2px solid #86efac;
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  text-align: center;
+}
+
+.preview-media-box {
+  width: 100%;
+  max-height: 320px;
+  background: #0f172a;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  border: 1px solid #cbd5e1;
+}
+
+.preview-media-box img {
+  max-width: 100%;
+  max-height: 320px;
+  object-fit: contain;
+}
+
+.preview-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  background: #f8fafc;
+  border-radius: var(--radius-sm);
+}
+
+.preview-filename {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #1e293b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.preview-status-badge {
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 50px;
+}
+
+.preview-controls-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.pedagogical-evidence-note {
+  font-size: 0.85rem;
+  color: #64748b;
+  background: #f8fafc;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   6. MODAL DE NOMBRE DEL ESTUDIANTE
+   ========================================================================== */
+.name-form-card {
+  max-width: 480px;
+  text-align: center;
+}
+
+.name-prompt-icon {
+  width: 72px;
+  height: 72px;
+  background: #e0f2fe;
+  color: #0284c7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px auto;
+}
+
+.name-prompt-icon svg {
+  width: 36px;
+  height: 36px;
+}
+
+.name-form-input-box {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.name-form-label {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #1e293b;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.text-input-styled {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.text-input-styled:focus {
+  border-color: #0284c7;
+  box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.15);
+}
+
+.name-privacy-guarantee {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 10px;
+}
+
+/* ==========================================================================
+   7. MODAL DEL TUTORIAL DE EXPORTACIÓN
+   ========================================================================== */
+.tutorial-modal-card {
+  max-width: 900px;
+}
+
+.tutorial-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 18px;
+}
+
+.tutorial-step-card {
+  background: #ffffff;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+
+.step-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #0284c7;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 50px;
+  z-index: 2;
+}
+
+.step-illustration {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  margin-top: 14px;
+}
+
+.step-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.step-text {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   8. PANTALLA Y EXPOSICIÓN DEL MUSEO DIGITAL
+   ========================================================================== */
+.museum-screen-wrapper {
+  padding: 40px 20px 80px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Estado bloqueado cuando faltan retos */
+.museum-locked-card {
+  background: #ffffff;
+  border: 2px dashed #cbd5e1;
+  border-radius: var(--radius-xl);
+  padding: 50px 30px;
+  text-align: center;
+  max-width: 800px;
+  margin: 40px auto;
+  box-shadow: var(--shadow-md);
+}
+
+.locked-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  background: #f1f5f9;
+  color: #64748b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+}
+
+.locked-icon-wrapper svg {
+  width: 44px;
+  height: 44px;
+}
+
+.museum-locked-card h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.locked-desc {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto 28px auto;
+}
+
+.missing-challenges-list {
+  background: #f8fafc;
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+.missing-challenges-list h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #334155;
+  margin-bottom: 14px;
+}
+
+.missing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.missing-btn {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+}
+
+.missing-btn:hover {
+  border-color: #0284c7;
+  background: #e0f2fe;
+}
+
+.missing-num {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #0284c7;
+}
+
+.missing-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.missing-arrow {
+  font-size: 0.8rem;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+/* Museo Abierto (Galería Completa) */
+.museum-exhibition {
+  background: #ffffff;
+  border: 3px solid #cbd5e1;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.museum-header {
+  text-align: center;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 30px;
+  margin-bottom: 40px;
+}
+
+.museum-crest {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0f172a;
+  color: #38bdf8;
+  padding: 6px 18px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+
+.museum-crest svg {
+  width: 18px;
+  height: 18px;
+}
+
+.museum-main-title {
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+
+.museum-artist-banner {
+  display: inline-block;
+  background: #eff6ff;
+  border: 2px solid #3b82f6;
+  border-radius: 50px;
+  padding: 8px 28px;
+  margin-bottom: 14px;
+}
+
+.artist-label {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #1d4ed8;
+  margin-right: 6px;
+}
+
+.artist-name {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #0f172a;
+  text-transform: uppercase;
+}
+
+.museum-collection-tag {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.museum-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.museum-help-tip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  border: 1px solid var(--border-light);
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  color: #64748b;
+  max-width: 700px;
+}
+
+.museum-help-tip svg {
+  width: 20px;
+  height: 20px;
+  color: #0284c7;
+  flex-shrink: 0;
+}
+
+/* Cuadrícula de cuadros de arte en el museo (2x2 para 4 retos) */
+.museum-art-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  max-width: 980px;
+  margin: 0 auto 40px auto;
+}
+
+@media (max-width: 680px) {
+  .museum-art-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.museum-frame-card {
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  border: 2px solid #cbd5e1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.frame-outer {
+  padding: 14px;
+  background: #ffffff;
+}
+
+.frame-matting {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.frame-artwork {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.25s ease;
+}
+
+.frame-matting:hover .frame-artwork {
+  transform: scale(1.03);
+}
+
+.frame-plaque {
+  background: #f8fafc;
+  border-top: 1.5px solid #e2e8f0;
+  padding: 12px 14px;
+  text-align: center;
+}
+
+.plaque-number {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #0284c7;
+  text-transform: uppercase;
+}
+
+.plaque-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 2px 0 4px 0;
+  line-height: 1.25;
+}
+
+.plaque-category {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.museum-footer {
+  text-align: center;
+  border-top: 2px solid #e2e8f0;
+  padding-top: 24px;
+}
+
+.museum-footer-text {
+  font-size: 0.95rem;
+  color: #64748b;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   9. MODAL DE CELEBRACIÓN (10/10 RETOS)
+   ========================================================================== */
+.celebration-card {
+  max-width: 540px;
+  text-align: center;
+  padding: 40px 30px;
+}
+
+.celebration-trophy-box {
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
+  color: #854d0e;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  box-shadow: 0 8px 24px rgba(234, 179, 8, 0.4);
+}
+
+.celebration-trophy-box svg {
+  width: 50px;
+  height: 50px;
+}
+
+.celebration-card h2 {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.celebration-card p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   10. SISTEMA DE TOAST NOTIFICATIONS & OVERLAY DE EXPORTACIÓN
+   ========================================================================== */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+  max-width: 440px;
+}
+
+.toast-card {
+  pointer-events: auto;
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.14);
+  border: 1.5px solid var(--border-light);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.toast-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.toast-success {
+  border-color: #86efac;
+  border-left: 5px solid #10b981;
+}
+.toast-success .toast-icon { color: #10b981; }
+
+.toast-error {
+  border-color: #fca5a5;
+  border-left: 5px solid #ef4444;
+}
+.toast-error .toast-icon { color: #ef4444; }
+
+.toast-info {
+  border-color: #93c5fd;
+  border-left: 5px solid #0284c7;
+}
+.toast-info .toast-icon { color: #0284c7; }
+
+/* Overlay de exportación en proceso */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #38bdf8;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.toast-pop-in {
+  animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast-fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.35s ease;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   11. RESPONSIVIDAD Y ADAPTABILIDAD
+   ========================================================================== */
+@media (max-width: 768px) {
+  .welcome-title {
+    font-size: 2.1rem;
+  }
+  .welcome-subtitle {
+    font-size: 1.2rem;
+  }
+  .welcome-card {
+    padding: 30px 20px;
+  }
+  .header-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  .progress-info-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .progress-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .project-management-group, .museum-trigger-group {
+    width: 100%;
+    justify-content: stretch;
+  }
+  .project-management-group .btn, .museum-trigger-group .btn {
+    flex: 1;
+  }
+  .modal-card {
+    max-height: 95vh;
+  }
+  .modal-header, .modal-body-scrollable, .modal-footer {
+    padding: 16px 20px;
+  }
+  .museum-main-title {
+    font-size: 1.8rem;
+  }
+  .museum-exhibition {
+    padding: 20px;
+  }
+}
